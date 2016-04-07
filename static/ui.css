@@ -1,0 +1,36 @@
+body {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-size: small;
+}
+table {
+    border: 1px solid firebrick;
+    border-spacing: 0;
+}
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    padding-right: 10px;
+}
+th {
+    border-bottom: 1px solid firebrick;
+}
+td:nth-child(even) {
+    background-color: whitesmoke;
+}
+th:nth-child(even) {
+    background-color: whitesmoke;
+}
+td:nth-child(odd) {
+    background-color: gainsboro;
+}
+th:nth-child(odd) {
+    background-color: gainsboro;
+}
+.whitesmoke {
+    background-color: whitesmoke;
+}
+.gainsboro {
+    background-color: gainsboro;
+}
