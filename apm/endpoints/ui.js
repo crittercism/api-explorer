@@ -15,26 +15,6 @@
     };
   }
 
-  // function query($scope, $cookies, $http){
-  //   $scope.submit = function() {
-  //     var httpReq = {
-  //       method: 'POST',
-  //       url: '/endpoints',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer ' + $scope.accessToken
-  //       },
-  //       data: JSON.stringify({'app_id': this.app_id, 'sort': this.sort,
-  //                             'duration': this.duration})};
-  //     $http(httpReq).
-  //     success(function(data){$scope.endpointData = data}).
-  //     error(function(status) {$scope.error = status});
-  //   };
-  //   $scope.deleteToken = function() {
-  //     $cookies.remove('accessToken');
-  //     window.location.reload();
-  //   }
-  // }
 
   function directQuery($scope, $cookies, $http){
     $scope.submit = function() {
@@ -102,19 +82,6 @@
       document.body.removeChild(element);
       };
     };
-
-
-
-
-
-
-      // window.open('data:text/csv;charset=utf-8,' + escape(csv_file));
-      // var csv_file = document.getElementById("Endpoint_CSV").download
-      // document.getElementById(csv_file).download = "Endpoint_CSV";
-
-
-
-
 
 
   var thisApp = angular.module("app", ["ngCookies"]);
