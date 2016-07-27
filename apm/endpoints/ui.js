@@ -15,26 +15,26 @@
     };
   }
 
-  function query($scope, $cookies, $http){
-    $scope.submit = function() {
-      var httpReq = {
-        method: 'POST',
-        url: '/endpoints',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + $scope.accessToken
-        },
-        data: JSON.stringify({'app_id': this.app_id, 'sort': this.sort,
-                              'duration': this.duration})};
-      $http(httpReq).
-      success(function(data){$scope.endpointData = data}).
-      error(function(status) {$scope.error = status});
-    };
-    $scope.deleteToken = function() {
-      $cookies.remove('accessToken');
-      window.location.reload();
-    }
-  }
+  // function query($scope, $cookies, $http){
+  //   $scope.submit = function() {
+  //     var httpReq = {
+  //       method: 'POST',
+  //       url: '/endpoints',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ' + $scope.accessToken
+  //       },
+  //       data: JSON.stringify({'app_id': this.app_id, 'sort': this.sort,
+  //                             'duration': this.duration})};
+  //     $http(httpReq).
+  //     success(function(data){$scope.endpointData = data}).
+  //     error(function(status) {$scope.error = status});
+  //   };
+  //   $scope.deleteToken = function() {
+  //     $cookies.remove('accessToken');
+  //     window.location.reload();
+  //   }
+  // }
 
   function directQuery($scope, $cookies, $http){
     $scope.submit = function() {
@@ -47,7 +47,8 @@
         },
         data: JSON.stringify({'params': {'appId': this.app_id, 'limit': 100000,
                               'duration': parseInt(this.duration),
-                              'sort': this.sort}})};
+                              'sort': this.sort}})
+      };
       $http(httpReq).
       success(function(res){
         $scope.endpointData = {'data':[]};
@@ -76,7 +77,45 @@
     $scope.orderByFunction = function(endpoint){
       return parseFloat(endpoint.value);
     };
-  }
+
+
+    $scope.exportCSV = function() {
+      var list_dict = $scope.endpointData.data;
+      var csv_file = "Domain,URI,Value,Start,End\n";
+      for (var x in list_dict) {
+        var dict = list_dict[x];
+        csv_file += [
+          String(dict['domain']), 
+          String(dict['uri']), 
+          String(dict['value']),
+          String(dict['start']),
+          String(dict['end']),
+          ].join();
+        csv_file += "\n";
+      }
+
+      var element = document.createElement('a'); 
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv_file)); 
+      element.setAttribute('download', "endpoint.csv"); 
+      element.style.display = 'none'; 
+      document.body.appendChild(element); element.click(); 
+      document.body.removeChild(element);
+      };
+    };
+
+
+
+
+
+
+      // window.open('data:text/csv;charset=utf-8,' + escape(csv_file));
+      // var csv_file = document.getElementById("Endpoint_CSV").download
+      // document.getElementById(csv_file).download = "Endpoint_CSV";
+
+
+
+
+
 
   var thisApp = angular.module("app", ["ngCookies"]);
   thisApp.controller("cookieController", ["$scope", "$cookies", setCookie]);

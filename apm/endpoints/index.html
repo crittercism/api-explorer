@@ -49,6 +49,7 @@
             </form>
             <div ng-hide="!error">Errors from API: {{ error }}</div>
             <div ng-controller="tableController" ng-hide="!endpointData">
+                <button ng-click="exportCSV()"> Download CSV </button>
                 <table class="endpoint">
                     <tr>
                         <th>
